@@ -1,0 +1,22 @@
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE & OS files
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Large Model Weights (>100MB GitHub limits) & Database files
+*.db
+!sqlite3.db
+*.pth
+!mobilenetv2_best.pth

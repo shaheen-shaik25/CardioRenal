@@ -1,0 +1,568 @@
+/* CardioPulse AI -- Healthcare Clinical Light Theme System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+:root {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-card-border: #e2e8f0;
+    --primary-blue: #2563eb;
+    --primary-blue-glow: rgba(37, 99, 235, 0.15);
+    
+    --risk-critical: #dc2626;
+    --risk-high: #ea580c;
+    --risk-moderate: #d97706;
+    --risk-low: #059669;
+    
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #64748b;
+    
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(at 10% 10%, rgba(37, 99, 235, 0.04) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(13, 148, 136, 0.04) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+}
+
+/* Header Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Logo & Pulse Visual Animations */
+.logo-pulse-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Medical Cross '+' Logo */
+.brand-logo-svg {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    transition: transform 0.25s ease;
+    animation: cross-pulse 2s infinite ease-in-out;
+}
+
+.brand-logo-svg:hover {
+    transform: scale(1.08);
+}
+
+@keyframes cross-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.3));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 4px 14px rgba(37, 99, 235, 0.5));
+        transform: scale(1.05);
+    }
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #0284c7;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px rgba(2, 132, 199, 0.5);
+    animation: dot-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes dot-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.3);
+    }
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(to right, #1e3a8a, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.65rem;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn:hover, .nav-btn.active {
+    color: #1e293b;
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.btn-fhir {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #047857;
+}
+
+.btn-fhir:hover {
+    background: #d1fae5;
+    border-color: #6ee7b7;
+    color: #065f46;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1350px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* EKG Hero Banner (Clinical Navy & Neon Wave) */
+.hero-pulse-banner {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0369a1 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.75rem;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 30px -5px rgba(30, 58, 138, 0.25);
+}
+
+.hero-pulse-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-ecg-line {
+    stroke-dasharray: 2400;
+    stroke-dashoffset: 2400;
+    animation: hero-sweep 3.2s linear infinite;
+}
+
+@keyframes hero-sweep {
+    0% {
+        stroke-dashoffset: 2400;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.hero-lead-dot {
+    animation: lead-dot-glow 1.5s infinite alternate;
+}
+
+@keyframes lead-dot-glow {
+    0% {
+        r: 4;
+        fill: #38bdf8;
+        filter: drop-shadow(0 0 4px #00f0ff);
+    }
+    100% {
+        r: 7.5;
+        fill: #ffffff;
+        filter: drop-shadow(0 0 16px #00f0ff);
+    }
+}
+
+.hero-text-overlay {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 2rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hero-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #7dd3fc;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+    backdrop-filter: blur(4px);
+}
+
+.hero-text-overlay h2 {
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.5px;
+}
+
+/* Glassmorphism Card (Light Clinical White Card) */
+.glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-card-border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Grid Layouts */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Preset Buttons */
+.presets-bar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.btn-preset {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-preset:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+}
+
+/* Form Styling */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.form-control {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.form-control:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px var(--primary-blue-glow);
+}
+
+/* Action Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1.25rem;
+    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.35);
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.45);
+}
+
+/* Results Panel */
+.risk-gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.gauge-circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1rem;
+    background: conic-gradient(var(--gauge-color, var(--risk-low)) calc(var(--gauge-value, 0) * 1%), #e2e8f0 0);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: background 0.8s ease;
+}
+
+.gauge-inner {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge-score {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.gauge-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.badge-severity {
+    padding: 0.35rem 1.25rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.badge-CRITICAL { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+.badge-HIGH { background: #fff7ed; color: #c2410c; border: 1px solid #fdba74; }
+.badge-MODERATE { background: #fefce8; color: #a16207; border: 1px solid #fef08a; }
+.badge-LOW { background: #ecfdf5; color: #065f46; border: 1px solid #6ee7b7; }
+
+.recommendation-box {
+    background: #f8fafc;
+    border-left: 4px solid var(--primary-blue);
+    border: 1px solid #e2e8f0;
+    border-left-width: 4px;
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: #1e293b;
+    margin-top: 1rem;
+    text-align: left;
+    width: 100%;
+}
+
+/* SHAP Factor Bars */
+.shap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.shap-item {
+    background: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.shap-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #0f172a;
+    margin-bottom: 0.4rem;
+}
+
+.shap-bar-bg {
+    height: 7px;
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.shap-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shap-bar-INCREASE { background: var(--risk-critical); }
+.shap-bar-DECREASE { background: var(--risk-low); }
+
+/* Table Styling */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.custom-table th, .custom-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.custom-table th {
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.custom-table tbody tr {
+    background: #ffffff;
+}
+
+.custom-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Printable Report Styles */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .hero-pulse-banner, .navbar, .presets-bar, .btn-primary, .nav-links, #search-history-input {
+        display: none !important;
+    }
+    .glass-card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        color: #000 !important;
+    }
+    .custom-table th, .custom-table td {
+        color: #000 !important;
+    }
+}

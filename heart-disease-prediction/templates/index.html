@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioPulse AI — Enterprise Clinical Decision Support System</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/logo.png">
+</head>
+<body>
+
+    <!-- Sticky Navbar -->
+    <header class="navbar">
+        <div class="brand">
+            <div class="logo-pulse-container">
+                <!-- Medical Cross '+' Logo with Glowing Heart Wave -->
+                <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="crossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00f0ff" />
+                            <stop offset="100%" stop-color="#2563eb" />
+                        </linearGradient>
+                        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="4" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    <!-- Medical Cross '+' Shape -->
+                    <rect x="36" y="10" width="28" height="80" rx="8" fill="url(#crossGrad)" filter="url(#glow)"/>
+                    <rect x="10" y="36" width="80" height="28" rx="8" fill="url(#crossGrad)" filter="url(#glow)"/>
+                    <!-- White Cardiac Pulse Wave Overlay -->
+                    <path d="M 22 50 L 38 50 L 43 36 L 49 64 L 54 26 L 60 58 L 65 44 L 70 50 L 78 50" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="pulse-indicator"></span>
+            </div>
+            <div>
+                <div class="brand-title">CardioPulse AI</div>
+                <div style="font-size: 0.72rem; color: #475569; display: flex; align-items: center; gap: 0.4rem;">
+                    <span>Enterprise Clinical Decision Support System</span>
+                    <span class="pulse-dot"></span>
+                </div>
+            </div>
+            <span class="brand-badge">CDSS v2.0</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn btn-fhir" onclick="simulateFhirIngest()">🏥 FHIR EHR Ingest</button>
+            <button class="nav-btn" onclick="printReport()">🖨️ Export PDF Summary</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Futuristic EKG Heartbeat & Medical Cross (+) Hero Banner -->
+        <div class="hero-pulse-banner">
+            <svg class="hero-pulse-svg" viewBox="0 0 1200 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="cyanPulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3"/>
+                        <stop offset="30%" stop-color="#00f0ff" stop-opacity="1"/>
+                        <stop offset="70%" stop-color="#60a5fa" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.4"/>
+                    </linearGradient>
+                    <filter id="electricGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="4" result="blur1"/>
+                        <feGaussianBlur stdDeviation="10" result="blur2"/>
+                        <feMerge>
+                            <feMergeNode in="blur2"/>
+                            <feMergeNode in="blur1"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Futuristic Grid -->
+                <g stroke="rgba(0, 240, 255, 0.07)" stroke-width="1">
+                    <line x1="0" y1="40" x2="1200" y2="40"/>
+                    <line x1="0" y1="110" x2="1200" y2="110"/>
+                    <line x1="0" y1="180" x2="1200" y2="180"/>
+                    <line x1="200" y1="0" x2="200" y2="220"/>
+                    <line x1="400" y1="0" x2="400" y2="220"/>
+                    <line x1="600" y1="0" x2="600" y2="220"/>
+                    <line x1="800" y1="0" x2="800" y2="220"/>
+                    <line x1="1000" y1="0" x2="1000" y2="220"/>
+                </g>
+
+                <!-- Glowing Medical Crosses (+) floating around the pulse peaks -->
+                <!-- Big Main Cross (+) -->
+                <g transform="translate(680, 40) scale(0.9)" filter="url(#electricGlow)">
+                    <rect x="-6" y="-20" width="12" height="40" rx="4" fill="#00f0ff"/>
+                    <rect x="-20" y="-6" width="40" height="12" rx="4" fill="#00f0ff"/>
+                </g>
+                <!-- Medium Left Cross (+) -->
+                <g transform="translate(540, 85) scale(0.65)" filter="url(#electricGlow)">
+                    <rect x="-5" y="-16" width="10" height="32" rx="3" fill="#38bdf8"/>
+                    <rect x="-16" y="-5" width="32" height="10" rx="3" fill="#38bdf8"/>
+                </g>
+                <!-- Medium Right Cross (+) -->
+                <g transform="translate(840, 55) scale(0.7)" filter="url(#electricGlow)">
+                    <rect x="-5" y="-16" width="10" height="32" rx="3" fill="#38bdf8"/>
+                    <rect x="-16" y="-5" width="32" height="10" rx="3" fill="#38bdf8"/>
+                </g>
+                <!-- Small Far Right Cross (+) -->
+                <g transform="translate(960, 110) scale(0.55)" filter="url(#electricGlow)">
+                    <rect x="-5" y="-16" width="10" height="32" rx="3" fill="#60a5fa"/>
+                    <rect x="-16" y="-5" width="32" height="10" rx="3" fill="#60a5fa"/>
+                </g>
+
+                <!-- Futuristic Wireframe Care Hand Contour (matching image) -->
+                <g stroke="#38bdf8" stroke-width="1.8" fill="none" opacity="0.8" filter="url(#electricGlow)">
+                    <path d="M 560 170 C 600 155, 650 148, 700 152 C 740 156, 780 168, 840 195 M 575 155 C 625 142, 670 138, 720 145 C 760 152, 810 172, 870 215 M 550 180 C 600 165, 660 160, 720 165 C 770 175, 820 200, 890 220" />
+                    <!-- Network Node Dots -->
+                    <circle cx="560" cy="170" r="3" fill="#00f0ff"/>
+                    <circle cx="650" cy="148" r="2.5" fill="#38bdf8"/>
+                    <circle cx="700" cy="152" r="3" fill="#00f0ff"/>
+                    <circle cx="780" cy="168" r="2.5" fill="#38bdf8"/>
+                    <circle cx="625" cy="142" r="3" fill="#00f0ff"/>
+                    <circle cx="720" cy="145" r="3.5" fill="#00f0ff"/>
+                </g>
+
+                <!-- Electric Blue High-Spike EKG Pulse Line -->
+                <path class="hero-ecg-line" d="M 0,110 L 360,110 L 380,95 L 400,125 L 420,110 L 490,110 L 510,90 L 530,130 L 550,70 L 570,140 L 590,50 L 610,160 L 630,20 L 650,200 L 670,15 L 690,175 L 710,60 L 730,140 L 750,80 L 770,125 L 790,100 L 810,120 L 830,110 L 1200,110" fill="none" stroke="url(#cyanPulseGrad)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#electricGlow)"/>
+
+                <!-- Glowing EKG Lead Dot -->
+                <circle class="hero-lead-dot" cx="360" cy="110" r="6" fill="#ffffff" filter="url(#electricGlow)"/>
+            </svg>
+
+            <div class="hero-text-overlay">
+                <div class="hero-badge"><span class="pulse-dot"></span> LIVE CLINICAL CARDIAC SIGNAL</div>
+                <h2>CardioPulse AI — Precision Decision Support</h2>
+            </div>
+        </div>
+
+        <!-- Top System Analytics Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="glass-card" style="padding: 1.25rem;">
+                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Total Assessments Logged</div>
+                <div id="stat-total" style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #2563eb;">-</div>
+            </div>
+            <div class="glass-card" style="padding: 1.25rem;">
+                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Average Risk Score</div>
+                <div id="stat-avg" style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #d97706;">-</div>
+            </div>
+            <div class="glass-card" style="padding: 1.25rem;">
+                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; text-transform: uppercase;">High-Risk Ratio</div>
+                <div id="stat-high" style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: #dc2626;">-</div>
+            </div>
+            <div class="glass-card" style="padding: 1.25rem;">
+                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Production Champion Model</div>
+                <div style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: #059669;">Random Forest (ROC 0.98)</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            
+            <!-- Left Column: Patient Form -->
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-title">🩺 Patient Clinical Parameters</div>
+                </div>
+
+                <!-- Presets -->
+                <div style="font-size: 0.8rem; color: #475569; font-weight: 600; margin-bottom: 0.5rem;">Load Realistic Preset Patient Profiles:</div>
+                <div class="presets-bar">
+                    <button type="button" class="btn-preset" onclick="loadPreset('high')">🔴 62yo Male (Acute Ischemia)</button>
+                    <button type="button" class="btn-preset" onclick="loadPreset('low')">🟢 45yo Female (Healthy Athlete)</button>
+                    <button type="button" class="btn-preset" onclick="loadPreset('moderate')">🟡 55yo Male (Borderline Metabolic)</button>
+                </div>
+
+                <form id="risk-form">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label for="input-patient_id">Patient Identification (ID / EHR Record)</label>
+                        <input type="text" id="input-patient_id" name="patient_id" class="form-control" value="PAT-8842-ENTERPRISE" placeholder="PAT-XXXX">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="input-age">Age (years)</label>
+                            <input type="number" id="input-age" name="age" class="form-control" value="58" min="1" max="120" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-sex">Sex</label>
+                            <select id="input-sex" name="sex" class="form-control" required>
+                                <option value="1" selected>Male (1)</option>
+                                <option value="0">Female (0)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-cp">Chest Pain Type</label>
+                            <select id="input-cp" name="cp" class="form-control" required>
+                                <option value="0" selected>0: Typical Angina</option>
+                                <option value="1">1: Atypical Angina</option>
+                                <option value="2">2: Non-Anginal Pain</option>
+                                <option value="3">3: Asymptomatic</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-trestbps">Resting BP (mm Hg)</label>
+                            <input type="number" id="input-trestbps" name="trestbps" class="form-control" value="145" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-chol">Serum Cholesterol (mg/dl)</label>
+                            <input type="number" id="input-chol" name="chol" class="form-control" value="233" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-fbs">Fasting Blood Sugar > 120</label>
+                            <select id="input-fbs" name="fbs" class="form-control" required>
+                                <option value="1" selected>1: Yes (>120 mg/dl)</option>
+                                <option value="0">0: No (≤120 mg/dl)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-restecg">Resting ECG Result</label>
+                            <select id="input-restecg" name="restecg" class="form-control" required>
+                                <option value="0" selected>0: Normal</option>
+                                <option value="1">1: ST-T Wave Abnormality</option>
+                                <option value="2">2: LV Hypertrophy</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-thalach">Max Heart Rate Achieved</label>
+                            <input type="number" id="input-thalach" name="thalach" class="form-control" value="150" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-exang">Exercise-Induced Angina</label>
+                            <select id="input-exang" name="exang" class="form-control" required>
+                                <option value="1">1: Yes</option>
+                                <option value="0" selected>0: No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-oldpeak">ST Depression (oldpeak)</label>
+                            <input type="number" step="0.1" id="input-oldpeak" name="oldpeak" class="form-control" value="2.3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-slope">ST Segment Slope</label>
+                            <select id="input-slope" name="slope" class="form-control" required>
+                                <option value="0" selected>0: Upsloping</option>
+                                <option value="1">1: Flat</option>
+                                <option value="2">2: Downsloping</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-ca">Major Vessels (Fluoroscopy)</label>
+                            <select id="input-ca" name="ca" class="form-control" required>
+                                <option value="0" selected>0 Vessels</option>
+                                <option value="1">1 Vessel</option>
+                                <option value="2">2 Vessels</option>
+                                <option value="3">3 Vessels</option>
+                                <option value="4">4 Vessels</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-thal">Thalassemia Result</label>
+                            <select id="input-thal" name="thal" class="form-control" required>
+                                <option value="1" selected>1: Normal</option>
+                                <option value="2">2: Fixed Defect</option>
+                                <option value="3">3: Reversible Defect</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-assess" class="btn-primary">
+                        ⚡ Assess Cardiac Risk & Explain (SHAP)
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: AI Risk Diagnostic & SHAP Explainability -->
+            <div id="results-card" class="glass-card" style="display: none;">
+                <div class="card-header">
+                    <div class="card-title">📊 AI Risk Assessment & SHAP Explainability</div>
+                    <span id="res-patient-id" style="font-size: 0.8rem; color: #64748b; font-weight: 600;">-</span>
+                </div>
+
+                <div class="risk-gauge-container">
+                    <div id="gauge-circle" class="gauge-circle">
+                        <div class="gauge-inner">
+                            <span id="res-score" class="gauge-score">0%</span>
+                            <span class="gauge-label">Risk Score</span>
+                        </div>
+                    </div>
+                    <div id="res-severity" class="badge-severity">MODERATE RISK</div>
+                    <div id="res-confidence" style="font-size: 0.82rem; color: #64748b; margin-bottom: 0.5rem;">Model Certainty: 0%</div>
+                    
+                    <div class="recommendation-box">
+                        <strong>Actionable Clinical Recommendation:</strong>
+                        <div id="res-recommendation" style="margin-top: 0.25rem;">-</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.5rem; color: #1e3a8a;">
+                        🔍 Per-Patient SHAP Risk Contribution Factors
+                    </h4>
+                    <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 1rem;">
+                        Exact numerical feature contributions ($\phi_i$) pushing risk higher (red) or lower (green).
+                    </p>
+                    
+                    <div id="shap-factors-list" class="shap-list">
+                        <!-- SHAP bars dynamically injected here -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Assessment History Table -->
+        <div class="glass-card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+                <div class="card-title">📜 Clinical Audit Log & Patient Assessment History</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="search-history-input" class="form-control" placeholder="Search patient ID..." style="font-size: 0.8rem; padding: 0.3rem 0.6rem;" onkeyup="filterHistoryTable()">
+                    <button class="nav-btn" onclick="fetchHistory()">🔄 Refresh</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Timestamp</th>
+                            <th>Risk Score</th>
+                            <th>Severity</th>
+                            <th>Confidence</th>
+                            <th>Actionable Clinical Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <tr><td colspan="6" style="text-align: center; color: #64748b;">Loading history records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
