@@ -97,7 +97,10 @@ CardioRenal-AI/
 4. **Access in Browser:**
    Open [http://localhost:8501](http://localhost:8501) in your browser.
 
----
+
+🚀 Live Dashboard:
+[https://sales-forecasting-demand-intelligence-system-byvarshi07.streamlit.app/
+](https://cardiorenal-ai-n9jexp5jfqmfsbenfw8sgv.streamlit.app/)---
 
 ## 🔬 Model Benchmarking & Performance
 
