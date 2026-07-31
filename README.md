@@ -76,31 +76,6 @@ CardioRenal-AI/
 - Python **3.10** or higher
 - `pip` package manager
 
-### Installation
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/Varshitha-0706/CardioRenal-AI.git
-   cd CardioRenal-AI
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Launch the Application:**
-   ```bash
-   streamlit run app.py
-   ```
-
-4. **Access in Browser:**
-   Open [http://localhost:8501](http://localhost:8501) in your browser.
-
-
-🚀 Live Dashboard:
-[https://sales-forecasting-demand-intelligence-system-byvarshi07.streamlit.app/
-](https://cardiorenal-ai-n9jexp5jfqmfsbenfw8sgv.streamlit.app/)---
 
 ## 🔬 Model Benchmarking & Performance
 
@@ -121,5 +96,4 @@ CardioRenal-AI/
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+
