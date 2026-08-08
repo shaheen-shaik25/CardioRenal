@@ -47,6 +47,17 @@ if HEART_DIR not in sys.path:
     sys.path.insert(0, HEART_DIR)
 
 import streamlit as st
+
+# ------------------------------------------------------------------------------
+# 1. Streamlit Page Configuration
+# ------------------------------------------------------------------------------
+st.set_page_config(
+    page_title="CardioRenal AI | Enterprise Multi-Specialty CDSS",
+    page_icon="🫀",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 import streamlit.components.v1 as components
 import torch
 import joblib
@@ -79,14 +90,8 @@ except Exception as e:
     st.error(f"Error loading Heart Disease modules: {e}")
 
 # ------------------------------------------------------------------------------
-# 1. Streamlit Page & Theme Configuration & HTML Component Generators
+# 1. Streamlit Theme Configuration & HTML Component Generators
 # ------------------------------------------------------------------------------
-st.set_page_config(
-    page_title="CardioRenal AI | Enterprise Multi-Specialty CDSS",
-    page_icon="🫀",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # Light Clinical Medical UI Styling & Micro-Animations
 st.markdown("""
